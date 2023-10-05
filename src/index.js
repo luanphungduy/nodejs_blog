@@ -7,6 +7,8 @@ const port = 3000;
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, '/public')))
+
 // HTTP request logger
 app.use(morgan('combined'));
 
@@ -16,13 +18,11 @@ app.engine('hbs', handlebars.engine({
   partialsDir: path.join(__dirname, '/resources/views/partials')
 }));
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resources/views'));
+app.set('views', path.join(__dirname, '/resources/views'));
 
 // Render
 app.get('/', (req, res) => {
-  res.render('home', {
-    layout: false
-  })
+  res.render('home')
 });
 
 app.get('/news', (req, res) => {
